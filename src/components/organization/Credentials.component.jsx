@@ -73,7 +73,7 @@ export default function CredentialsPage() {
   }
 
   return (
-    <div className=" text-white px-6 py-10 relative">
+    <div className="text-white px-6 py-10 relative">
       <Confirm isOpen={confirmPopupOpen} onClose={() => handleClosePopup()} onConfirm={() => handleStatusUpdate()} />
       <AddCredential isOpen={addPopupOpen} onClose={() => setAddPopupOpen(false)} loadDate={loadDate} setLoadDate={setLoadDate} />
       <EditCredentialModal isOpen={editPopupOpen} credential={editData} onClose={()=>handleCloseEditPopup()} loadDate={loadDate} setLoadDate={setLoadDate}/>

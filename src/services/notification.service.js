@@ -7,8 +7,8 @@ const api = {
 
 }
 
-api.sendImmediateNotification = async (body) => {
-    let apiUrl = baseUrl + `/send-immediate`;
+api.sendNotification = async (body) => {
+    let apiUrl = baseUrl + `/send`;
     const apiRes = await PostRequest({ url: apiUrl,body:body });
     return apiRes;
 }
