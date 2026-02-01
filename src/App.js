@@ -7,6 +7,7 @@ import Navbar from './components/common/Navbar.component'
 import NotFound from './components/common/NotFound.component'
 import Credentials from './components/organization/Credentials.component'
 import Notification from './components/organization/Notification.component'
+import Organizations from './components/admin/Organizations.component'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/credentials' element={<Credentials />} />
           <Route path='/notifications' element={<Notification/>} />
           <Route path='/admin/login' element={<AdminLogin />} />
+          <Route path='/admin/organizations' element={<Organizations />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

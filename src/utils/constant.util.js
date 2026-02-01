@@ -1,4 +1,10 @@
 const constantData = {
+    organization:{
+        status:{
+            active:1,
+            inactive:2
+        }
+    },
     reducerActionType: {
         alertMessageSet: 'alert-message-set',
     },

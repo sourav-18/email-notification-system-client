@@ -1,18 +1,32 @@
 import { useState, useRef, useEffect } from "react";
 import { BookOpen, Key, Bell } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const NAV_ITEMS = [
+const ORGANIZATION_NAV_ITEMS = [
   { id: "/apiDocs", label: "API Docs", icon: BookOpen },
   { id: "/credentials", label: "Credentials", icon: Key },
   { id: "/notifications", label: "Notification History", icon: Bell },
 ];
 
-export default function TopNavbar({ onChange }) {
+const ADMIN_NAV_ITEMS = [
+  { id: "/admin/organizations", label: "Organization", icon: BookOpen },
+  { id: "/admin/credentials", label: "Credentials", icon: Key },
+  { id: "/admin/notifications", label: "Notification History", icon: Bell },
+];
 
+export default function TopNavbar({ onChange }) {
+  const [NAV_ITEMS,setNav_ITEMS]=useState(ORGANIZATION_NAV_ITEMS);
+  const location = useLocation()
   const [active, setActive] = useState(NAV_ITEMS[0].id);
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
   const itemRefs = useRef({});
+
+  useEffect(()=>{
+      setActive(location.pathname)
+      if(location.pathname.includes("/admin")){
+        setNav_ITEMS(ADMIN_NAV_ITEMS);
+      }
+  },[])
 
   const handleChange = (id) => {
     setActive(id);
