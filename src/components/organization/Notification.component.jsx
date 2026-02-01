@@ -14,15 +14,25 @@ import DateTimePicker from '../common/DateTimePicker.component';
 
 
 function Notification() {
+  const defaultFilterStatus={ _id: "All", value: "All Status" }
   const [sort, setSort] = useState({ field: "_id", order: 'desc' });
   const [page, setPage] = useState(1);
   const [view, setView] = useState(null);
   const [totalDocumentCount, setTotalDocumentCount] = useState(0);
   const [credentialData, setCredentialData] = useState([]);
   const [credential, setCredential] = useState({ _id: "All", value: "All Credential" });
+  const [filterStatus,setFilterStatus]=useState(defaultFilterStatus)
   const [search, setSearch] = useState("");
   const [sendEmailPopup, setSendEmailPopup] = useState(false)
   const [switchButton, setSwitchButton] = useState("history");
+  const status = [
+    {_id: 1,value:"Ideal"},
+    {_id: 2,value:"Processing"},
+    {_id: 3,value:"Error"},
+    {_id: 4,value:"Success"},
+    {_id: 5,value:"Failed"},
+    {_id: 6,value:"Cancel"},
+  ]
 
   const limit = 10;
 
@@ -31,7 +41,7 @@ function Notification() {
       sort.order = sort.order === 'asc' ? 'desc' : 'asc';
     } else {
       sort.field = field;
-      sort.order = -1;
+      sort.order = 'desc';
     }
     setSort({ ...sort });
   }
@@ -43,9 +53,9 @@ function Notification() {
     let data = [], totalCount = 0;
     let apiRes = null;
     if (switchButton === "history") {
-      apiRes = await notificationApi.getHistory(sort, page, limit, search, credential._id);
+      apiRes = await notificationApi.getHistory(sort, page, limit, search, credential._id,filterStatus._id);
     } else {
-      apiRes = await notificationApi.getQueueData(sort, page, limit, search, credential._id);
+      apiRes = await notificationApi.getQueueData(sort, page, limit, search, credential._id,filterStatus._id);
     }
     if (apiRes.status === "success") {
       data = apiRes.data.items
@@ -68,7 +78,7 @@ function Notification() {
 
   useEffect(() => {
     loadDate();
-  }, [sort, page, search, credential, switchButton])
+  }, [sort, page, search, credential, switchButton,filterStatus])
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-12 py-8 text-white">
@@ -82,9 +92,11 @@ function Notification() {
         <Search placeholder={"Search id, receiver, subject ..."} search={search} setSearch={setSearch} />
         <Filter filterData={credentialData} selected={credential}
           setSelected={setCredential} defaultFilter={{ _id: "All", value: "All Credential" }} />
+        <Filter filterData={status} selected={filterStatus}
+          setSelected={setFilterStatus} defaultFilter={defaultFilterStatus} width='w-32'/>
         <div className='ml-auto'><PrimaryButton text={""} icon={Send} onClick={() => setSendEmailPopup(true)} /></div>
       </div>
-      <NotificationTable data={histories} sort={sort} onSort={onSort} setView={setView} />
+      <NotificationTable switchButton={switchButton} data={histories} sort={sort} onSort={onSort} setView={setView} />
       <Pagination page={page} totalPages={Math.ceil(totalDocumentCount / limit)} setPage={setPage} />
     </div>
   );

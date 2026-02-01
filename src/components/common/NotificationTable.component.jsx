@@ -6,7 +6,7 @@ import {
 import SortHeader from "./SortableHeader.component";
 import IdCell from "./IdCell.component";
 
-export default function NotificationTable({ data, sort, onSort,setView }) {
+export default function NotificationTable({ data, sort, onSort, setView, switchButton }) {
   return (
     <div className="lg:block">
       <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur overflow-x-auto">
@@ -18,7 +18,9 @@ export default function NotificationTable({ data, sort, onSort,setView }) {
               <th className="px-4 py-3 text-xs text-gray-400">Subject</th>
               <SortHeader label="Attempts" field="attemptCount" sort={sort} onSort={onSort} />
               <SortHeader label="Queue Time" field="queueEntryTime" sort={sort} onSort={onSort} />
-              <SortHeader label="Success Time" field="successTime" sort={sort} onSort={onSort} />
+              {switchButton === 'history' ? <SortHeader label="Success Time" field="successTime" sort={sort} onSort={onSort} />
+                : <SortHeader label="Schedule Time" field="scheduleTime" sort={sort} onSort={onSort} />}
+
               <th className="px-4 py-3 text-xs text-gray-400">Status</th>
               <th className="px-4 py-3 text-xs text-gray-400 text-right">Actions</th>
             </tr>
@@ -39,8 +41,8 @@ export default function NotificationTable({ data, sort, onSort,setView }) {
                 <td className="px-4 py-3 text-gray-300 ">{n.receiverEmailId}</td>
                 <td className="px-4 py-3 max-w-[260px] truncate text-gray-400">{n.subject}</td>
                 <td className="px-4 py-3 text-gray-400">{n.attemptCount}</td>
-                <td className="px-4 py-3 text-gray-400">{new Date(n.queueEntryTime).toLocaleString()}</td>
-                <td className="px-4 py-3 text-gray-400">{n.successTime ? new Date(n.successTime).toLocaleString() : "—"}</td>
+                <td className="px-4 py-3 text-gray-400">{n.queueEntryTime ? new Date(n.queueEntryTime).toLocaleString() : "—"}</td>
+                <td className="px-4 py-3 text-gray-400">{switchButton==="history"?n.successTime ? new Date(n.successTime).toLocaleString() : "—":n.scheduleTime ? new Date(n.scheduleTime).toLocaleString() : "—"}</td>
                 <td className="px-4 py-3"><StatusBadge status={n.status} /></td>
                 <td className="px-4 py-3 text-right space-x-2">
                   {/* {(n.status === 3 || n.status === 5) && (
@@ -48,7 +50,7 @@ export default function NotificationTable({ data, sort, onSort,setView }) {
                       <AlertTriangle size={14} className="inline" /> Error
                     </button>
                   )} */}
-                  <button onClick={()=>setView(n._id)} className="px-2 py-1 text-xs rounded-md bg-indigo-500/20 text-indigo-300">
+                  <button onClick={() => setView(n._id)} className="px-2 py-1 text-xs rounded-md bg-indigo-500/20 text-indigo-300">
                     <Mail size={14} className="inline" /> View
                   </button>
                 </td>
@@ -62,17 +64,18 @@ export default function NotificationTable({ data, sort, onSort,setView }) {
 }
 
 function StatusBadge({ status }) {
-    const STATUS = {
-        1: { label: "Idle", cls: "bg-gray-500/20 text-gray-300" },
-        2: { label: "Processing", cls: "bg-blue-500/20 text-blue-300" },
-        3: { label: "Error", cls: "bg-red-500/20 text-red-300" },
-        4: { label: "Success", cls: "bg-green-500/20 text-green-300" },
-        5: { label: "Failed", cls: "bg-orange-500/20 text-orange-300" },
-    };
-    const s = STATUS[status];
-    return (
-        <span className={`px-2 py-1 rounded-md text-xs whitespace-nowrap ${s.cls}`}>
-            {s.label}
-        </span>
-    );
+  const STATUS = {
+    1: { label: "Idle", cls: "bg-gray-500/20 text-gray-300" },
+    2: { label: "Processing", cls: "bg-blue-500/20 text-blue-300" },
+    3: { label: "Error", cls: "bg-red-500/20 text-red-300" },
+    4: { label: "Success", cls: "bg-green-500/20 text-green-300" },
+    5: { label: "Failed", cls: "bg-orange-500/20 text-orange-300" },
+    6: { label: "Cancel", cls: "bg-gray-500/20 text-white-300" },
+  };
+  const s = STATUS[status];
+  return (
+    <span className={`px-2 py-1 rounded-md text-xs whitespace-nowrap ${s.cls}`}>
+      {s.label}
+    </span>
+  );
 }

@@ -58,7 +58,7 @@ function Filter({ filterData,selected,setSelected,defaultFilter,width="w-64" }) 
       >
         <ul
           className="
-            py-2 max-h-64 overflow-y-auto
+            py-2 max-h-80 overflow-y-auto
             scrollbar-thin
             scrollbar-track-transparent
             scrollbar-thumb-slate-700/70
