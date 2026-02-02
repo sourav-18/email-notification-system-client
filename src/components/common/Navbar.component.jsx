@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { BookOpen, Key, Bell } from "lucide-react";
+import { Building,BookOpen, Key, Bell } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const ORGANIZATION_NAV_ITEMS = [
@@ -9,7 +9,7 @@ const ORGANIZATION_NAV_ITEMS = [
 ];
 
 const ADMIN_NAV_ITEMS = [
-  { id: "/admin/organizations", label: "Organization", icon: BookOpen },
+  { id: "/admin/organizations", label: "Organization", icon: Building },
   { id: "/admin/credentials", label: "Credentials", icon: Key },
   { id: "/admin/notifications", label: "Notification History", icon: Bell },
 ];

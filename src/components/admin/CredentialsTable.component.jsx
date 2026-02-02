@@ -8,7 +8,7 @@ import SortHeader from "../common/SortableHeader.component";
 import IdCell from "../common/IdCell.component";
 import constantData from "../../utils/constant.util";
 
-export default function OrganizationTable({ data, sort, onSort, setStatusUpdate }) {
+export default function CredentialsTable({ data, sort, onSort, setStatusUpdate }) {
 
   return (
     <div className="lg:block">
@@ -17,10 +17,9 @@ export default function OrganizationTable({ data, sort, onSort, setStatusUpdate 
           <thead className="bg-white/5">
             <tr>
               <SortHeader label="ID" field="_id" sort={sort} onSort={onSort} />
-              <th className="px-4 py-3 text-xs text-gray-400">Name</th>
+              <th className="px-4 py-3 text-xs text-gray-400">Organization Name</th>
               <th className="px-4 py-3 text-xs text-gray-400">Email</th>
-              <SortHeader label="LastLogin" field="lastLoginTime" sort={sort} onSort={onSort} />
-              <SortHeader label="CreatedAt" field="createdAt" sort={sort} onSort={onSort} />
+                <th className="px-4 py-3 text-xs text-gray-400">CreatedAt</th>
               <th className="px-4 py-3 text-xs text-gray-400">Status</th>
             </tr>
           </thead>
@@ -29,7 +28,7 @@ export default function OrganizationTable({ data, sort, onSort, setStatusUpdate 
             {data && data.length === 0 && (
               <tr>
                 <td colSpan={8} className="py-16 text-center text-gray-400">
-                  No notification history available
+                  No Credentials available
                 </td>
               </tr>
             )}
@@ -37,11 +36,10 @@ export default function OrganizationTable({ data, sort, onSort, setStatusUpdate 
             {data && data.map(n => (
               <tr key={n._id} className="border-t border-white/5 hover:bg-white/5">
                 <td className="px-4 py-3"><IdCell id={n._id} /></td>
-                <td className="px-4 py-3 max-w-[260px] truncate text-gray-400">{n.name}</td>
-                <td className="px-4 py-3 text-gray-300 ">{n.emailId}</td>
-                <td className="px-4 py-3 text-gray-400">{n.lastLoginTime ? new Date(n.lastLoginTime).toLocaleString() : "—"}</td>
+                <td className="px-4 py-3 max-w-[260px] truncate text-gray-400">{n.organizationName}</td>
+                <td className="px-4 py-3 text-gray-300 ">{n.emailUserName}</td>
                 <td className="px-4 py-3 text-gray-400">{n.createdAt ? new Date(n.createdAt).toLocaleString() : "—"}</td>
-                <td className="px-4 py-3 text-gray-300 flex justify-center">
+                <td className="px-4 py-3 text-gray-300 ">
                   <button
                     onClick={() => {
                       setStatusUpdate({

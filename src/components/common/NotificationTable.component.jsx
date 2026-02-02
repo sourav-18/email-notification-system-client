@@ -26,7 +26,7 @@ export default function NotificationTable({ data, sort, onSort, setView, switchB
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="text-center">
             {data.length === 0 && (
               <tr>
                 <td colSpan={8} className="py-16 text-center text-gray-400">

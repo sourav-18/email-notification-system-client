@@ -11,12 +11,13 @@ import Filter from '../common/Filter.component';
 import PrimaryButton from '../common/PrimaryButton.component';
 import IconButton from '../common/IconButton.component';
 import AddOrganization from '../common/AddOrganization.component';
+import CredentialsTable from './CredentialsTable.component';
 
-function Organizations() {
+export default function Credentials() {
   const defaultFilterStatus = { _id: "All", value: "All Status" };
   const [filterStatus, setFilterStatus] = useState(defaultFilterStatus);
   const [sort, setSort] = useState({ field: "_id", order: 'desc' });
-  const [organizations, setOrganizations] = useState([]);
+  const [credentials, setCredentials] = useState([]);
   const [statusUpdate, setStatusUpdate] = useState(null);
   const [confirmPopupOpen, setConfirmPopup] = useState(false);
   const [search, setSearch] = useState("");
@@ -48,19 +49,19 @@ function Organizations() {
   }
 
   async function loadData() {
-    const apiRes = await adminApi.organization.list(page, limit, sort, search, filterStatus._id);
+    const apiRes = await adminApi.credential.list(page, limit, sort, search, filterStatus._id);
     if (apiRes.status === "success") {
-      setOrganizations(apiRes.data.items);
+      setCredentials(apiRes.data.items);
       setTotalDocumentCount(apiRes.data.totalCount)
     } else {
-      setOrganizations([]);
+      setCredentials([]);
       setTotalDocumentCount(0);
     }
   }
 
   async function handleStatusUpdate() {
     if (statusUpdate) {
-      const apiRes = await adminApi.organization.statusUpdate(statusUpdate.id, statusUpdate.status);
+      const apiRes = await adminApi.credential.statusUpdate(statusUpdate.id, statusUpdate.status);
       if (apiRes.status === "success") {
         loadData();
       }
@@ -95,21 +96,17 @@ function Organizations() {
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-12 py-8 text-white">
-      <AddOrganization isOpen={addPopupOpen} onClose={closeAddPopup} refresh={refresh} setRefresh={setRefresh}/>
       <Confirm isOpen={confirmPopupOpen} onClose={() => handleClosePopup()} onConfirm={() => handleStatusUpdate()} />
       <div className="flex flex-wrap gap-3 items-center mb-6">
-        <h1 className="text-xl font-semibold">Notification History</h1>
+        <h1 className="text-xl font-semibold">Credentials History</h1>
       </div>
       <div className="flex flex-wrap gap-3 mb-4">
-        <Search placeholder={"Search Id, Name, Email ..."} search={search} setSearch={setSearch} />
+        <Search placeholder={"Search Id , Email ..."} search={search} setSearch={setSearch} />
         <Filter filterData={status} selected={filterStatus}
           setSelected={setFilterStatus} defaultFilter={defaultFilterStatus} width='w-32' /> 
-        <div className='ml-auto'><IconButton onClick={()=>setAddPopupOpen(true)} Icon={Plus}/></div>
       </div>
-      <OrganizationTable sort={sort} onSort={onSort} data={organizations} setStatusUpdate={setStatusUpdate} />
+      <CredentialsTable sort={sort} onSort={onSort} data={credentials} setStatusUpdate={setStatusUpdate} />
       <Pagination page={page} totalPages={Math.ceil(totalDocumentCount / limit)} setPage={setPage} />
     </div>
   )
 }
-
-export default Organizations
