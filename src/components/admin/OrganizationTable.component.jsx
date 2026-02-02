@@ -29,7 +29,7 @@ export default function OrganizationTable({ data, sort, onSort, setStatusUpdate 
             {data && data.length === 0 && (
               <tr>
                 <td colSpan={8} className="py-16 text-center text-gray-400">
-                  No notification history available
+                  No organizations history available
                 </td>
               </tr>
             )}

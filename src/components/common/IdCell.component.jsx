@@ -12,7 +12,7 @@ export default function IdCell({ id }) {
   };
 
   return (
-    <div className="flex items-center gap-2 font-mono text-gray-400">
+    <div className="flex justify-center items-center gap-2 font-mono text-gray-400">
       <span>
         {id.slice(0, 6)}...{id.slice(-4)}
       </span>

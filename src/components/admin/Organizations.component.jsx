@@ -6,7 +6,7 @@ import { AllState } from '../../context/Context';
 import constantData from '../../utils/constant.util';
 import Confirm from '../common/Confirm.component';
 import Search from '../common/Search.component';
-import Pagination from '../History/Pagination';
+import Pagination from '../common/Pagination.component';
 import Filter from '../common/Filter.component';
 import PrimaryButton from '../common/PrimaryButton.component';
 import IconButton from '../common/IconButton.component';
@@ -98,7 +98,7 @@ function Organizations() {
       <AddOrganization isOpen={addPopupOpen} onClose={closeAddPopup} refresh={refresh} setRefresh={setRefresh}/>
       <Confirm isOpen={confirmPopupOpen} onClose={() => handleClosePopup()} onConfirm={() => handleStatusUpdate()} />
       <div className="flex flex-wrap gap-3 items-center mb-6">
-        <h1 className="text-xl font-semibold">Notification History</h1>
+        <h1 className="text-xl font-semibold">Organizations History</h1>
       </div>
       <div className="flex flex-wrap gap-3 mb-4">
         <Search placeholder={"Search Id, Name, Email ..."} search={search} setSearch={setSearch} />

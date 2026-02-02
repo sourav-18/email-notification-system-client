@@ -4,7 +4,8 @@ const baseUrl = process.env.REACT_APP_BASE_URL + "/admin";
 
 const api = {
     organization: {},
-    credential: {}
+    credential: {},
+    notification: {},
 };
 
 api.organization.list = async (page, limit, sort, search, status) => {
@@ -62,4 +63,39 @@ api.credential.statusUpdate = async (id, status) => {
     const apiRes = await PatchRequest({ url: apiUrl });
     return apiRes;
 }
+
+api.notification.getHistoryList = async (sort, page, limit, search, status) => {
+    let apiUrl = baseUrl + `/notifications/histories?page=${page}&limit=${limit}`;
+    if (sort.field) {
+        apiUrl = apiUrl + `&sort=${sort.order == 'desc' ? '-' : ''}${sort.field}`;
+    }
+
+    if (search && search.length > 1) {
+        apiUrl = apiUrl + `&search=${search}`;
+    }
+
+    if (status && status != 'All') {
+        apiUrl = apiUrl + `&status=${status}`;
+    }
+    const apiRes = await GetRequest({ url: apiUrl });
+    return apiRes;
+}
+
+api.notification.getQueueList = async (sort, page, limit, search, status) => {
+    let apiUrl = baseUrl + `/notifications/queues?page=${page}&limit=${limit}`;
+    if (sort.field) {
+        apiUrl = apiUrl + `&sort=${sort.order == 'desc' ? '-' : ''}${sort.field}`;
+    }
+
+    if (search && search.length > 1) {
+        apiUrl = apiUrl + `&search=${search}`;
+    }
+
+    if (status && status != 'All') {
+        apiUrl = apiUrl + `&status=${status}`;
+    }
+    const apiRes = await GetRequest({ url: apiUrl });
+    return apiRes;
+}
+
 export default api;

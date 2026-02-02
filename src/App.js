@@ -9,6 +9,7 @@ import Credentials from './components/organization/Credentials.component'
 import Notification from './components/organization/Notification.component'
 import Organizations from './components/admin/Organizations.component'
 import CredentialsForAdmin from './components/admin/Credentials.component'
+import NotificationForAdmin from './components/admin/Notifications.component'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/admin/login' element={<AdminLogin />} />
           <Route path='/admin/organizations' element={<Organizations />} />
           <Route path='/admin/credentials' element={<CredentialsForAdmin />} />
+          <Route path='/admin/notifications' element={<NotificationForAdmin />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

@@ -6,11 +6,8 @@ import { AllState } from '../../context/Context';
 import constantData from '../../utils/constant.util';
 import Confirm from '../common/Confirm.component';
 import Search from '../common/Search.component';
-import Pagination from '../History/Pagination';
+import Pagination from '../common/Pagination.component';
 import Filter from '../common/Filter.component';
-import PrimaryButton from '../common/PrimaryButton.component';
-import IconButton from '../common/IconButton.component';
-import AddOrganization from '../common/AddOrganization.component';
 import CredentialsTable from './CredentialsTable.component';
 
 export default function Credentials() {

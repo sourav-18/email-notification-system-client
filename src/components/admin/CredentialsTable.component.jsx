@@ -39,7 +39,7 @@ export default function CredentialsTable({ data, sort, onSort, setStatusUpdate }
                 <td className="px-4 py-3 max-w-[260px] truncate text-gray-400">{n.organizationName}</td>
                 <td className="px-4 py-3 text-gray-300 ">{n.emailUserName}</td>
                 <td className="px-4 py-3 text-gray-400">{n.createdAt ? new Date(n.createdAt).toLocaleString() : "—"}</td>
-                <td className="px-4 py-3 text-gray-300 ">
+                <td className="px-4 py-3 text-gray-300 flex justify-center ">
                   <button
                     onClick={() => {
                       setStatusUpdate({
