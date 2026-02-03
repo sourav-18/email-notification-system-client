@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import notificationApi from '../../services/notification.service';
 import Pagination from '../common/Pagination.component';
 import Search from '../common/Search.component';
 import Filter from '../common/Filter.component';
 import adminApi from '../../services/admin.service';
-import MailView from '../common/MailView.component';
 import SwitchButton from '../common/SwitchButton.component';
 import NotificationTable from './NotificationTable.component';
+import MailViewModal from './MailView.component';
 
 
 function Notification() {
@@ -49,7 +48,6 @@ function Notification() {
       apiRes = await adminApi.notification.getHistoryList(sort, page, limit, search,filterStatus._id);
     } else {
       apiRes = await adminApi.notification.getQueueList(sort, page, limit, search,filterStatus._id);
-      console.log(apiRes)
     }
     if (apiRes.status === "success") {
       data = apiRes.data.items
@@ -65,7 +63,7 @@ function Notification() {
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-12 py-8 text-white">
-      <MailView id={view} onClose={() => setView(null)} switchButton={switchButton} />
+      <MailViewModal id={view} onClose={() => setView(null)} switchButton={switchButton} />
       <div className="flex flex-wrap gap-3 items-center mb-6">
         <h1 className="text-xl font-semibold">Notification History</h1>
         <div className='m-auto'><SwitchButton value={switchButton} onChange={setSwitchButton} /></div>

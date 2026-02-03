@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const ORGANIZATION_NAV_ITEMS = [
   { id: "/apiDocs", label: "API Docs", icon: BookOpen },
-  { id: "/credentials", label: "Credentials", icon: Key },
+  { id: "/", label: "Credentials", icon: Key },
   { id: "/notifications", label: "Notification History", icon: Bell },
 ];
 
@@ -40,6 +40,8 @@ export default function TopNavbar({ onChange }) {
       setIndicator({ left: offsetLeft, width: offsetWidth });
     }
   }, [active]);
+
+  if(location.pathname.includes("/login")||location.pathname.includes("/signup"))return;
 
   return (
     <div className="h-24">

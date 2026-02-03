@@ -1,12 +1,19 @@
 import { GetRequest, PatchRequest, PostRequest, PutRequest } from "./api.service";
 
-const baseUrl = process.env.REACT_APP_BASE_URL + "/admin";
+const baseUrl = process.env.REACT_APP_BASE_URL + "/admins";
 
 const api = {
+    admin: {},
     organization: {},
     credential: {},
     notification: {},
 };
+
+api.admin.profileDetails = async () => {
+    let apiUrl = baseUrl + "/profile"
+    const apiRes = await GetRequest({ url: apiUrl });
+    return apiRes;
+}
 
 api.organization.list = async (page, limit, sort, search, status) => {
     let apiUrl = baseUrl + `/organizations?page=${page}&limit=${limit}`;
@@ -97,5 +104,18 @@ api.notification.getQueueList = async (sort, page, limit, search, status) => {
     const apiRes = await GetRequest({ url: apiUrl });
     return apiRes;
 }
+
+api.notification.historyDetailsById = async (id) => {
+    let apiUrl = baseUrl + `/notifications/histories/${id}`;
+    const apiRes = await GetRequest({ url: apiUrl });
+    return apiRes;
+}
+
+api.notification.queuesDetailsById = async (id) => {
+    let apiUrl = baseUrl + `/notifications/queues/${id}`;
+    const apiRes = await GetRequest({ url: apiUrl });
+    return apiRes;
+}
+
 
 export default api;

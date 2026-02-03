@@ -9,6 +9,12 @@ export const organizationLogin = async (body) => {
     return apiRes;
 }
 
+export const organizationSignup = async (body) => {
+    let apiUrl=baseUrl+"/organizations/signup";
+    const apiRes=await PostRequest({url:apiUrl,body:body});
+    return apiRes;
+}
+
 export const adminLogin = async (body) => {
     let apiUrl=baseUrl+"/admins/login";
     const apiRes=await PostRequest({url:apiUrl,body:body});

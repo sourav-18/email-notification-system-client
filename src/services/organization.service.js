@@ -7,6 +7,12 @@ const api={
 
 }
 
+api.profileDetails = async () => {
+    let apiUrl = baseUrl + "/profile"
+    const apiRes = await GetRequest({ url: apiUrl });
+    return apiRes;
+}
+
 api.addCredential = async (body) => {
     let apiUrl=baseUrl+"/credentials";
     const apiRes=await PostRequest({url:apiUrl,body:body});

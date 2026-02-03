@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Building2, ChevronRight } from 'lucide-react';
 import { AllState } from "../../context/Context";
 import constantData from "../../utils/constant.util";
 import { adminLogin } from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { setUserDataInLocalStorage } from "../../utils/fun.util";
 
 export default function LoginPage() {
-  const navigation=useNavigate();
+  const navigation = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,91 +29,76 @@ export default function LoginPage() {
     if (apiRes.status == "error") {
       return;
     }
-    localStorage.setItem("token", apiRes.data.token);
-    navigation("/");
+
+    setUserDataInLocalStorage({
+      token: apiRes.data.token,
+      userType: constantData.userType.admin
+    })
+    dispatch({ type: constantData.reducerActionType.loadProfileData });
+    navigation("/admin/organizations");
   }
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-white/20">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white">Welcome Admin</h1>
-          <p className="text-gray-300 mt-2 text-sm">
-            Login to continue to your account
-          </p>
+    <div className="flex min-h-screen items-center justify-center p-4 antialiased">
+      {/* Micro-Container: Fixed width 340px for that 'Small' feel */}
+      <div className="relative w-full max-w-[360px] bg-[#111827] border border-white/10 rounded-[15px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+
+        {/* Subtle Glow behind the icon */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-cyan-500/10 blur-[40px] rounded-full -z-10" />
+
+        {/* Minimal Header */}
+        <div className="flex flex-col items-center mb-6 text-center">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-900/40 mb-3">
+            <Building2 size={20} className="text-white" />
+          </div>
+          <h2 className="text-[17px] font-bold text-white tracking-tight">Login With Admin</h2>
         </div>
 
-        {/* Form */}
-        <form className="space-y-6">
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-200 mb-1">
-              Email address
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="you@example.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
+        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+
+          <div className="relative group">
+            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-cyan-400 transition-colors" size={14} />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email address"
+              className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-2.5 pl-10 pr-4 text-[13px] text-white focus:outline-none focus:border-cyan-500/40 focus:bg-white/[0.05] transition-all"
+            />
           </div>
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-200 mb-1">
-              Password
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                className="w-full pl-10 pr-12 py-2.5 rounded-xl bg-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
+          {/* Password Input */}
+          <div className="relative group">
+            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-cyan-400 transition-colors" size={14} />
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-2.5 pl-10 pr-10 text-[13px] text-white focus:outline-none focus:border-cyan-500/40 focus:bg-white/[0.05] transition-all"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+            >
+              {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+            </button>
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2 text-gray-300">
-              <input type="checkbox" className="rounded" />
-              Remember me
-            </label>
-            <a href="#" className="text-indigo-400 hover:underline">
-              Forgot password?
-            </a>
-          </div>
-
-          {/* Button */}
+          {/* Action Button - High Contrast */}
           <button
+            type="submit"
             onClick={() => handleLogin()}
-            type="button"
-            className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 transition text-white font-semibold shadow-lg"
+            className="w-full group mt-4 relative py-2.5 bg-cyan-700 text-white/85 text-[13px] font-bold rounded-xl hover:bg-cyan-600  transition-all active:scale-[0.97]"
           >
-            Sign In
+            <span className="flex items-center justify-center gap-1">
+              Login <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+            </span>
           </button>
         </form>
 
-        {/* Footer */}
-        <p className="text-center text-gray-400 text-sm mt-6">
-          Don’t have an account?{' '}
-          <a href="#" className="text-indigo-400 hover:underline">
-            Sign up
-          </a>
-        </p>
+        {/* Specular highlight at the bottom edge */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-white/10 rounded-full" />
       </div>
     </div>
   );
