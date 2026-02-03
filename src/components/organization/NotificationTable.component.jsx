@@ -38,8 +38,8 @@ export default function NotificationTable({ data, sort, onSort, setView, switchB
             {data.map(n => (
               <tr key={n._id} className="border-t border-white/5 hover:bg-white/5">
                 <td className="px-4 py-3"><IdCell id={n._id} /></td>
-                <td className="px-4 py-3 text-gray-300 ">{n.receiverEmailId?n.receiverEmailId.substr(0,12):""}</td>
-                <td className="px-4 py-3 max-w-[260px] truncate text-gray-400">{n.subject?n.subject.substr(0,12):""}</td>
+                <td className="px-4 py-3 text-gray-300 ">{n.receiverEmailId?n.receiverEmailId.substr(0,18)+"...":""}</td>
+                <td className="px-4 py-3 max-w-[260px] truncate text-gray-400">{n.subject?n.subject.substr(0,12)+"...":""}</td>
                 <td className="px-4 py-3 text-gray-400">{n.attemptCount}</td>
                 <td className="px-4 py-3 text-gray-400">{n.queueEntryTime ? new Date(n.queueEntryTime).toLocaleString() : "—"}</td>
                 <td className="px-4 py-3 text-gray-400">{switchButton==="history"?n.successTime ? new Date(n.successTime).toLocaleString() : "—":n.scheduleTime ? new Date(n.scheduleTime).toLocaleString() : "—"}</td>
