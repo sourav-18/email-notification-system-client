@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Pencil, Eye, Layout, ToggleLeft, ToggleRight } from 'lucide-react';
 import constantData from '../../utils/constant.util';
-import Confirm from './Confirm.component';
+import Confirm from '../common/Confirm.component';
 
 const CredentialCard = ({ credential, setStatusUpdate, setEditData }) => {
 

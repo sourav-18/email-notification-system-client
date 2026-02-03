@@ -10,7 +10,7 @@ import Pagination from '../common/Pagination.component';
 import Filter from '../common/Filter.component';
 import PrimaryButton from '../common/PrimaryButton.component';
 import IconButton from '../common/IconButton.component';
-import AddOrganization from '../common/AddOrganization.component';
+import AddOrganization from '../organization/AddOrganization.component';
 
 function Organizations() {
   const defaultFilterStatus = { _id: "All", value: "All Status" };

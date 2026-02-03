@@ -3,8 +3,8 @@ import {
   Mail,
   AlertTriangle
 } from "lucide-react";
-import SortHeader from "./SortableHeader.component";
-import IdCell from "./IdCell.component";
+import SortHeader from "../common/SortableHeader.component";
+import IdCell from "../common/IdCell.component";
 
 export default function NotificationTable({ data, sort, onSort, setView, switchButton }) {
   return (

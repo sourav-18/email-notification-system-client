@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import NotificationTable from '../common/NotificationTable.component';
+import NotificationTable from './NotificationTable.component';
 import notificationApi from '../../services/notification.service';
 import Pagination from '../common/Pagination.component';
 import Search from '../common/Search.component';
