@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { dispatch, state: { adminProfile, organizationProfile } } = AllState();
+  const { dispatch, state: { adminProfile } } = AllState();
 
 
   function sendAlert(message, status = "error") {
@@ -39,13 +39,10 @@ export default function LoginPage() {
   }
 
   useEffect(() => {
-    if (organizationProfile) {
-      navigation(constantData.defaultRoute.organization);
-    }
-    else if (adminProfile) {
+    if (adminProfile) {
       navigation(constantData.defaultRoute.admin);
     }
-  }, [organizationProfile, adminProfile])
+  }, [adminProfile])
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 antialiased">
@@ -83,6 +80,7 @@ export default function LoginPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
+              autoComplete="on"
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-2.5 pl-10 pr-10 text-[13px] text-white focus:outline-none focus:border-cyan-500/40 focus:bg-white/[0.05] transition-all"
             />

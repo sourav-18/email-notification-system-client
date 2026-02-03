@@ -27,7 +27,7 @@ export default function TopNavbar({ onChange }) {
       if(location.pathname.includes("/admin")){
         setNav_ITEMS(ADMIN_NAV_ITEMS);
       }
-  },[])
+  },[location])
 
   const handleChange = (id) => {
     setActive(id);

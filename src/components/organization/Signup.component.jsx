@@ -57,10 +57,7 @@ const CompactSignup = () => {
         if (organizationProfile) {
             navigation(constantData.defaultRoute.organization);
         }
-        else if (adminProfile) {
-            navigation(constantData.defaultRoute.admin);
-        }
-    }, [organizationProfile, adminProfile])
+    }, [organizationProfile])
 
     return (
         <div className="flex min-h-screen items-center justify-center p-4 antialiased">
@@ -108,6 +105,7 @@ const CompactSignup = () => {
                         <input
                             type={showPass ? "text" : "password"}
                             placeholder="Password"
+                            autoComplete="on"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full bg-white/[0.03] border border-white/5 rounded-xl py-2.5 pl-10 pr-10 text-[13px] text-white focus:outline-none focus:border-cyan-500/40 focus:bg-white/[0.05] transition-all"
@@ -126,6 +124,7 @@ const CompactSignup = () => {
                         <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-cyan-400 transition-colors" size={14} />
                         <input
                             type={showConfirm ? "text" : "password"}
+                            autoComplete="on"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="Confirm password"
