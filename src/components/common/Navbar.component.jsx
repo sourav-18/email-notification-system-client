@@ -8,6 +8,7 @@ const ORGANIZATION_NAV_ITEMS = [
   { id: "/notifications", label: "Notification History", icon: Bell },
 ];
 
+
 const ADMIN_NAV_ITEMS = [
   { id: "/admin/organizations", label: "Organization", icon: Building },
   { id: "/admin/credentials", label: "Credentials", icon: Key },

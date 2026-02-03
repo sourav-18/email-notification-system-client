@@ -34,7 +34,6 @@ export default function CredentialsPage() {
     const apiRes = await organizationApi.getCredential();
     if (apiRes.status == "success") {
       setCredentials(apiRes.data);
-      console.log(apiRes.data)
     }
   }
 

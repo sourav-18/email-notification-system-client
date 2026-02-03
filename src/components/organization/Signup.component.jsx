@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, Building2, ChevronRight, ALargeSmall } from 'lucide-react';
 import { AllState } from '../../context/Context';
 import constantData from '../../utils/constant.util';
@@ -15,7 +15,7 @@ const CompactSignup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const { dispatch } = AllState();
+    const { dispatch, state: { adminProfile, organizationProfile } } = AllState();
 
     function sendAlert(message, status = "error") {
         dispatch({
@@ -49,9 +49,18 @@ const CompactSignup = () => {
             userType: constantData.userType.organization
         })
         dispatch({ type: constantData.reducerActionType.loadProfileData });
-        navigation("/");
+        navigation(constantData.defaultRoute.organization);
 
     }
+
+    useEffect(() => {
+        if (organizationProfile) {
+            navigation(constantData.defaultRoute.organization);
+        }
+        else if (adminProfile) {
+            navigation(constantData.defaultRoute.admin);
+        }
+    }, [organizationProfile, adminProfile])
 
     return (
         <div className="flex min-h-screen items-center justify-center p-4 antialiased">

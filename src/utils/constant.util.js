@@ -27,6 +27,10 @@ const constantData = {
     userType: {
         admin: "admin",
         organization: "organization"
+    },
+    defaultRoute:{
+        organization:"/",
+        admin:"/admin/organizations"
     }
 }
 

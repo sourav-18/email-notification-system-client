@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mail, Lock, Eye, EyeOff, Building2, ChevronRight } from 'lucide-react';
 import { AllState } from "../../context/Context";
 import constantData from "../../utils/constant.util";
@@ -11,8 +11,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { dispatch, state: { adminProfile, organizationProfile } } = AllState();
 
-  const { dispatch } = AllState();
 
   function sendAlert(message, status = "error") {
     dispatch({
@@ -35,8 +35,18 @@ export default function LoginPage() {
       userType: constantData.userType.admin
     })
     dispatch({ type: constantData.reducerActionType.loadProfileData });
-    navigation("/admin/organizations");
+    navigation(constantData.defaultRoute.admin);
   }
+
+  useEffect(() => {
+    if (organizationProfile) {
+      navigation(constantData.defaultRoute.organization);
+    }
+    else if (adminProfile) {
+      navigation(constantData.defaultRoute.admin);
+    }
+  }, [organizationProfile, adminProfile])
+
   return (
     <div className="flex min-h-screen items-center justify-center p-4 antialiased">
       {/* Micro-Container: Fixed width 340px for that 'Small' feel */}

@@ -1,7 +1,13 @@
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AllState } from "../../context/Context";
 
 export default function NotFoundPage() {
+  const navigation = useNavigate();
+  const { state: { adminProfile, organizationProfile } } = AllState();
+  if (!adminProfile && !organizationProfile) {
+    navigation("/login");
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-gray-900 to-black px-4 overflow-hidden">
       <div className="relative text-center">
