@@ -44,7 +44,7 @@ export default function SendMailModal({ open, onClose }) {
                 return sendAlert("Date and Time is required for schedule mail");
             }else{
                 sendData.priority=constantData.sendMail.priority.schedule
-                sendData.scheduleTime=schedule.date+" "+schedule.time;
+                sendData.scheduleTime=schedule.date+"T"+schedule.time;
             }
         }
 
