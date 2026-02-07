@@ -20,6 +20,7 @@ import organizationApi from "./services/organization.service.js";
 import { AllState } from './context/Context.jsx'
 import ProtectedOrganizationRoutes from './utils/ProtectedOrganizationRoutes.util.js'
 import ProtectedAdminRoutes from './utils/ProtectedAdminRoutes.util.js'
+import ApiDocs from './components/common/ApiDocs.component.jsx'
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
     } else if (currentUser === constantData.userType.organization) {
       const apiRes = await organizationApi.profileDetails();
       if (apiRes.status == "success") {
+        console.log(apiRes.data)
         dispatch({
           type: constantData.reducerActionType.organizationProfileSet,
           payload: apiRes.data
@@ -70,6 +72,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/admin/login' element={<AdminLogin />} />
+          <Route path='/api-docs' element={<ApiDocs/>} />
 
           <Route element={<ProtectedOrganizationRoutes isProfileLoading={isProfileLoading} />}>
             <Route path='/' element={<Credentials />} />

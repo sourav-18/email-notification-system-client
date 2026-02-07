@@ -80,6 +80,7 @@ export default function LogoutProfile({ name = "name", userImage = profileLogo }
                 </div>
                   <p className='text-sm font-bold text-white/75 text-center'> {adminProfile?.name ?? organizationProfile?.name}</p>
                   <p className='text-xs font-medium text-white/45 text-center'> {adminProfile?.emailId ?? organizationProfile?.emailId}</p>
+                  <p className='text-xs font-medium text-white/45 text-center'> {organizationProfile?.secretKey}</p>
               </div>
 
               {/* Action Stack */}

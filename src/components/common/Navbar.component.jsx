@@ -3,7 +3,7 @@ import { Building,BookOpen, Key, Bell } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const ORGANIZATION_NAV_ITEMS = [
-  { id: "/apiDocs", label: "API Docs", icon: BookOpen },
+  { id: "/api-docs", label: "API Docs", icon: BookOpen },
   { id: "/", label: "Credentials", icon: Key },
   { id: "/notifications", label: "Notification History", icon: Bell },
 ];
