@@ -85,6 +85,7 @@ Password: password
 ```bash
 git clone https://github.com/sourav-18/email-notification-system-client.git
 cd email-notification-system-client
+cp example.env .env
 npm install
 ```
 
