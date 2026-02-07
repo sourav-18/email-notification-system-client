@@ -1,70 +1,160 @@
-# Getting Started with Create React App
+# Email Notification System – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the **frontend** for the Email Notification System. It provides a clean UI for organizations to manage email notifications, credentials, history, and administration features.
 
-## Available Scripts
+🔗 **Live Demo**: [https://email-notification-system-client-i9.vercel.app/login](https://email-notification-system-client-i9.vercel.app/login)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📦 Backend Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The backend for this project is **highly scalable** and designed for production workloads.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🔗 Backend GitHub URL: https://github.com/sourav-18/email-notification-system-api
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 What is Email Notification System?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The Email Notification System is a platform where:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Organizations can **register using their email and password**
+* Organizations can **add email credentials** (Gmail address + App Password)
+* Organizations can **send emails via APIs** (we act as the API provider)
+* Organizations can **send emails manually from the UI**
+* Organizations can **view email notification history**
+* Admins can **manage organizations, credentials, and activities** from the admin panel
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This frontend application communicates with a **highly scalable backend service** to perform all operations.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🖥️ Features (Frontend)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Organization Panel
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* Organization signup & login
+* Dashboard overview
+* Add & manage email credentials
+* Send emails manually from UI
+* View sent email notification history
+* Secure authentication & authorization
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Admin Panel
 
-## Learn More
+* View and manage all organizations
+* Monitor email activities
+* Manage system-level configurations
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔐 Test Organization Credentials
 
-### Code Splitting
+You can use the following **dummy credentials** to test the application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+Email: test@gmail.com
+Password: password
+```
 
-### Analyzing the Bundle Size
+⚠️ These credentials are for **testing/demo purposes only**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🧰 Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* **Frontend Framework**: React
+* **Styling**: CSS / Tailwind (if applicable)
+* **State Management**: Context API / Redux (if applicable)
+* **API Communication**: REST APIs
+* **Deployment**: Vercel
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## ⚙️ Environment Setup
 
-### Deployment
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* Node.js (v18+ recommended)
+* npm or yarn
 
-### `npm run build` fails to minify
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+git clone https://github.com/sourav-18/email-notification-system-client.git
+cd email-notification-system-client
+npm install
+```
+
+### Run Locally
+
+```bash
+npm start
+```
+
+The app will run on:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🔑 Email Credential Setup (Important)
+
+To send emails, organizations must:
+
+1. Use a **valid Gmail address**
+2. Enable **2-Step Verification** in Google Account
+3. Generate a **Google App Password**
+4. Add the **email + app password** in the dashboard
+
+📌 Normal Gmail passwords **will not work**.
+
+---
+
+## 📡 API-Based Email Sending
+
+Organizations can integrate with our system using APIs to send emails programmatically.
+
+* We act as the **Email API Provider**
+* All email requests are authenticated
+* Each request is logged and visible in notification history
+
+(Backend documentation is maintained separately.)
+
+---
+
+## 🔒 Security Considerations
+
+* Passwords are never stored in plain text
+* App passwords are securely handled
+* Token-based authentication
+* Role-based access (Admin / Organization)
+
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+**Sourav**
+Backend Developer | Full Stack Enthusiast
+
+If you find this project useful, please ⭐ the repository!
